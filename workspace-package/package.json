@@ -1,5 +1,5 @@
 {
-  "name": "aws-efs-sqlite",
+  "name": "workspace-package",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,11 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "workspaces": [
-    "workspace-package"
-  ],
   "dependencies": {
-    "better-sqlite3": "11.4.0",
-    "sst": "3.17.10"
+    "pg": "8.16.3"
   }
 }

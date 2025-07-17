@@ -30,20 +30,23 @@ export default $config({
     // NAT Gateways are required for Lambda functions
     const vpc = new sst.aws.Vpc("MyVpc", { nat: "managed" });
 
-    // Create an EFS file system to store the SQLite database
-    const efs = new sst.aws.Efs("MyEfs", { vpc });
-
-    // Create a Lambda function that queries the database
+    // This function will get {"better-sqlite3": "11.4.0"}
     new sst.aws.Function("MyFunction", {
       vpc,
       url: true,
-      volume: {
-        efs,
-        path: "/mnt/efs",
-      },
       handler: "index.handler",
       nodejs: {
         install: ["better-sqlite3"],
+      },
+    });
+
+    // This function will get {"pg": "*"}
+    new sst.aws.Function("MyWorkspaceFunction", {
+      vpc,
+      url: true,
+      handler: "workspace-package/index.handler",
+      nodejs: {
+        install: ["pg"],
       },
     });
   },
